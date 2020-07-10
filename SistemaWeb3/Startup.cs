@@ -37,7 +37,8 @@ namespace SistemaWeb3
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<SistemaWeb3Context>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("SistemaWeb3Context")));
+                    options.UseMySql(Configuration.GetConnectionString("SistemaWeb3Context"), builder =>
+                    builder.MigrationsAssembly("SistemaWeb3")));   
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
