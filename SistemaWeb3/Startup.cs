@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using SistemaWeb3.Models;
 
 namespace SistemaWeb3
 {
@@ -33,6 +35,9 @@ namespace SistemaWeb3
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<SistemaWeb3Context>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("SistemaWeb3Context")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

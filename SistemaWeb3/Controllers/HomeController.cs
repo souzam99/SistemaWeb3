@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using SistemaWeb3.Models;
+using SistemaWeb3.Models.ViewModels;
 
 namespace SistemaWeb3.Controllers
 {
