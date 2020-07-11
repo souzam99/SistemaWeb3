@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using SistemaWeb3.Models;
+using SistemaWeb3.Data;
 
 namespace SistemaWeb3
 {
@@ -38,15 +39,18 @@ namespace SistemaWeb3
 
             services.AddDbContext<SistemaWeb3Context>(options =>
                     options.UseMySql(Configuration.GetConnectionString("SistemaWeb3Context"), builder =>
-                    builder.MigrationsAssembly("SistemaWeb3")));   
+                    builder.MigrationsAssembly("SistemaWeb3")));
+
+            services.AddScoped<SeedingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedingService seedingService)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                seedingService.Seed();
             }
             else
             {
